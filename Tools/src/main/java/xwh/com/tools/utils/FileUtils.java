@@ -1,4 +1,4 @@
-package xwh.com.tools;
+package xwh.com.tools.utils;
 
 /**
  * Author xwh
