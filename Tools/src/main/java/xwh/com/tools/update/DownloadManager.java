@@ -16,8 +16,8 @@ public class DownloadManager {
 
     private Downloader downloader;
 
-    public DownloadManager(Context context, String fileSavePath, String downloadUrl){
-        downloader = new Downloader(fileSavePath,downloadUrl);
+    public DownloadManager(Context context, String fileSavePath, String fileName,String downloadUrl){
+        downloader = new Downloader(fileSavePath,fileName,downloadUrl);
         mHandler = new Handler();
     }
 
