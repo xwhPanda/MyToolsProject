@@ -1,21 +1,21 @@
 package xwh.com.mytoolsproject;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-import java.io.File;
-import java.io.IOException;
-
-import xwh.com.tools.utils.StorageUtils;
-import xwh.com.tools.utils.ToastUtil;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author xwh
@@ -24,70 +24,76 @@ import xwh.com.tools.utils.ToastUtil;
  */
 public class MainActivity extends AppCompatActivity {
     int i = 0;
-    private EditText editText;
+    private XWHSwipeRefreshLayout xwhSwipeRefreshLayout;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private List<String> list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        xwhSwipeRefreshLayout = (XWHSwipeRefreshLayout) findViewById(R.id.layout);
 
-        editText = (EditText) findViewById(R.id.editText);
+        for (int i = 0;i<20;i++){
+            list.add(i + "");
+        }
 
-        editText.addTextChangedListener(new TextWatcher() {
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new MyAdapter(this,list));
+
+        xwhSwipeRefreshLayout.setOnRefreshListener(new XWHSwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.e("TAG","---------------1");
-                if (s.length() > 0){
-                    Log.e("TAG","---------------2");
-                    handler.removeCallbacks(runnable);
-                    handler.postDelayed(runnable,1000);
-                }else {
-                    Log.e("TAG","---------------3");
-                    handler.removeCallbacks(runnable);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onRefresh() {
+                Log.e("TAG","onRefresh");
+                handler.sendEmptyMessageDelayed(1,5000);
             }
         });
 
-        String path = StorageUtils.getSdcardPath() + "/aaaa/";
-        String name = "a.txt";
-        File file = new File(path);
-        File saveFile = new File(path,name);
-        if (!file.exists())
-            file.mkdirs();
-        if (!saveFile.exists())
-            try {
-                saveFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
     }
-
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            Log.e("TAG","runnable");
-        }
-    };
 
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            Log.e("TAG"," get message ! ");
+            if (msg.what == 1)
+                xwhSwipeRefreshLayout.setRefreshing(false);
         }
     };
 
-    public void buttonEvent(View view){
-        ToastUtil.showToast(this,"这是第 " + ++i + " 个Toast ！");
+
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder>{
+        private Context context;
+        private List<String> lists;
+
+        public MyAdapter(Context context,List<String> lists){
+            this.context = context;
+            this.lists = lists;
+        }
+
+        @Override
+        public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item,parent,false);
+            return new MyHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(MyHolder holder, int position) {
+            holder.textView.setText(lists.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return lists.size();
+        }
+
+        class MyHolder extends RecyclerView.ViewHolder{
+            protected TextView textView;
+            public MyHolder(View itemView) {
+                super(itemView);
+                textView = (TextView) itemView.findViewById(R.id.text);
+            }
+        }
     }
 }
