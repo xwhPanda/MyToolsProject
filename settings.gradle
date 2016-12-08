@@ -1,1 +1,1 @@
-include ':app', ':Tools'
+include ':app', ':Tools', ':NoteBook'
