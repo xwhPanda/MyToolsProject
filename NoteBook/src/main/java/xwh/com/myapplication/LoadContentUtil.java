@@ -43,10 +43,6 @@ public class LoadContentUtil {
 
         public LoadAsyncTask(){}
 
-        public LoadAsyncTask(ReadingBook readingBook){
-            this.readingBook = readingBook;
-        }
-
         public void setReadingBook(ReadingBook readingBook){
             this.readingBook = readingBook;
         }
