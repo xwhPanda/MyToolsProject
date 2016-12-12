@@ -14,6 +14,7 @@ public class ReadingBook extends Book implements Serializable{
     private String latestReadTime;
     private String lastChapterUrl;
     private String nextChapterUrl;
+    private String chapterContent;
 
     public String getReadChapter() {
         return readChapter;
@@ -63,6 +64,14 @@ public class ReadingBook extends Book implements Serializable{
         this.nextChapterUrl = nextChapterUrl;
     }
 
+    public String getChapterContent() {
+        return chapterContent;
+    }
+
+    public void setChapterContent(String chapterContent) {
+        this.chapterContent = chapterContent;
+    }
+
     @Override
     public String toString() {
         return "ReadingBook{" +
@@ -72,6 +81,7 @@ public class ReadingBook extends Book implements Serializable{
                 ", latestReadTime='" + latestReadTime + '\'' +
                 ", lastChapterUrl='" + lastChapterUrl + '\'' +
                 ", nextChapterUrl='" + nextChapterUrl + '\'' +
+                ", chapterContent='" + chapterContent + '\'' +
                 '}';
     }
 }
