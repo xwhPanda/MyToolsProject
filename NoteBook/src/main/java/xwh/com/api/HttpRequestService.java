@@ -21,5 +21,5 @@ public interface HttpRequestService {
      * @return
      */
     @GET("http://zhannei.baidu.com/cse/search")
-    Observable<ResponseBody> searchBook(@Query("q") String searchString, @Query("click") String actionType, @Query("s") String s);
+    Observable<ResponseBody> searchBook(@Query("q") String searchString, @Query("entry") String actionType, @Query("s") String s);
 }

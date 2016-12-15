@@ -1,12 +1,14 @@
 package xwh.com.util;
 
-import android.util.Log;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import xwh.com.bean.Author;
 import xwh.com.bean.ReadingBook;
 
 /**
@@ -15,18 +17,24 @@ import xwh.com.bean.ReadingBook;
 
 public class ParseHtmlFormSearch {
 
-    public static void getListFromHtml(String html){
+    public static List<ReadingBook> getListFromHtml(String html){
+        List<ReadingBook> bookList = new ArrayList<>();
         Document document = Jsoup.parse(html);
         Elements elements = document.getElementsByClass("result-item result-game-item");
-        Log.e("TAG",elements.get(0).html());
+//        Log.e("TAG",elements.get(0).html());
         for (Element element : elements){
             ReadingBook readingBook = new ReadingBook();
             readingBook.setBookPic(getBookImgUrl(element));
             readingBook.setBookName(getBookName(element));
             readingBook.setHostUrl(getBookUrl(element));
             readingBook.setDesc(getDesc(element));
-            getDetailElements(element);
+            readingBook.setAuthor(getAuthor(element));
+            readingBook.setWordNumber(getValue(getDetailElements(element).get(1).text()));
+            readingBook.setClickNumber(getValue(getDetailElements(element).get(2).text()));
+            readingBook.setUpdateStatu(getValue(getDetailElements(element).get(3).text()));
+            bookList.add(readingBook);
         }
+        return bookList;
     }
 
     /**
@@ -104,7 +112,20 @@ public class ParseHtmlFormSearch {
      * @param element
      * @return
      */
-    private static String getAuthor(Element element){
-        Elements elements = getDetailElements(element);
+    private static Author getAuthor(Element element){
+        Author author = new Author();
+        String name = getValue(getDetailElements(element).get(0).text());
+        author.setName(name);
+        return author;
+    }
+
+    /**
+     * 处理字数，点击，更新状态
+     * @param text
+     * @return
+     */
+    private static String getValue(String text){
+        int index = text.indexOf("：");
+        return text.substring(index + 1).trim();
     }
 }

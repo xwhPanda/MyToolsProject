@@ -7,7 +7,9 @@ import java.io.Serializable;
  * Email 1152046774@qq.com
  * CreateTime 2016/12/8 14:46
  */
-public class ReadingBook extends Book implements Serializable{
+public class ReadingBook implements Serializable{
+    /* 书名 */
+    private String bookName;
     /* 正在读的章节 */
     private String readChapter;
     /* 书籍地址 */
@@ -26,6 +28,22 @@ public class ReadingBook extends Book implements Serializable{
     private String bookPic;
     /* 简介 */
     private String desc;
+    /* 作者 */
+    private Author author;
+    /* 字数 */
+    private String wordNumber;
+    /* 点击 */
+    private String clickNumber;
+    /* 更新状态 */
+    private String updateStatu;
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
 
     public String getReadChapter() {
         return readChapter;
@@ -99,10 +117,43 @@ public class ReadingBook extends Book implements Serializable{
         this.desc = desc;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public String getWordNumber() {
+        return wordNumber;
+    }
+
+    public void setWordNumber(String wordNumber) {
+        this.wordNumber = wordNumber;
+    }
+
+    public String getClickNumber() {
+        return clickNumber;
+    }
+
+    public void setClickNumber(String clickNumber) {
+        this.clickNumber = clickNumber;
+    }
+
+    public String getUpdateStatu() {
+        return updateStatu;
+    }
+
+    public void setUpdateStatu(String updateStatu) {
+        this.updateStatu = updateStatu;
+    }
+
     @Override
     public String toString() {
         return "ReadingBook{" +
-                "readChapter='" + readChapter + '\'' +
+                "bookName='" + bookName + '\'' +
+                ", readChapter='" + readChapter + '\'' +
                 ", hostUrl='" + hostUrl + '\'' +
                 ", url='" + url + '\'' +
                 ", latestReadTime='" + latestReadTime + '\'' +
@@ -111,6 +162,10 @@ public class ReadingBook extends Book implements Serializable{
                 ", chapterContent='" + chapterContent + '\'' +
                 ", bookPic='" + bookPic + '\'' +
                 ", desc='" + desc + '\'' +
+                ", author=" + author +
+                ", wordNumber='" + wordNumber + '\'' +
+                ", clickNumber='" + clickNumber + '\'' +
+                ", updateStatu='" + updateStatu + '\'' +
                 '}';
     }
 }
