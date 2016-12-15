@@ -1,4 +1,4 @@
-package xwh.com.myapplication;
+package xwh.com.bean;
 
 import java.io.Serializable;
 
@@ -8,13 +8,24 @@ import java.io.Serializable;
  * CreateTime 2016/12/8 14:46
  */
 public class ReadingBook extends Book implements Serializable{
+    /* 正在读的章节 */
     private String readChapter;
+    /* 书籍地址 */
     private String hostUrl;
+    /**/
     private String url;
+    /* 上次读的时间 */
     private String latestReadTime;
+    /* 上一章 */
     private String lastChapterUrl;
+    /* 下一章 */
     private String nextChapterUrl;
+    /* 当前章节内容 */
     private String chapterContent;
+    /* 书籍图片 */
+    private String bookPic;
+    /* 简介 */
+    private String desc;
 
     public String getReadChapter() {
         return readChapter;
@@ -72,6 +83,22 @@ public class ReadingBook extends Book implements Serializable{
         this.chapterContent = chapterContent;
     }
 
+    public String getBookPic() {
+        return bookPic;
+    }
+
+    public void setBookPic(String bookPic) {
+        this.bookPic = bookPic;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     @Override
     public String toString() {
         return "ReadingBook{" +
@@ -82,6 +109,8 @@ public class ReadingBook extends Book implements Serializable{
                 ", lastChapterUrl='" + lastChapterUrl + '\'' +
                 ", nextChapterUrl='" + nextChapterUrl + '\'' +
                 ", chapterContent='" + chapterContent + '\'' +
+                ", bookPic='" + bookPic + '\'' +
+                ", desc='" + desc + '\'' +
                 '}';
     }
 }

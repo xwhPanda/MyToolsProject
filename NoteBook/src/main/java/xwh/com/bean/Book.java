@@ -1,4 +1,4 @@
-package xwh.com.myapplication;
+package xwh.com.bean;
 
 import java.io.Serializable;
 

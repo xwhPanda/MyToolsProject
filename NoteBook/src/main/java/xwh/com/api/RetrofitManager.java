@@ -17,18 +17,28 @@ public class RetrofitManager {
     public int connectTimeOut = 10;
     public int readTimeOut = 10;
     public String baseUrl = "http://zhannei.baidu.com/";
+    public RetrofitManager instance;
 
     public RetrofitManager(){
-        OkHttpClient.Builder okBuileder = new OkHttpClient.Builder();
-        okBuileder.connectTimeout(connectTimeOut, TimeUnit.SECONDS);
-        okBuileder.readTimeout(readTimeOut,TimeUnit.SECONDS.SECONDS);
+        instance = this;
+    }
+
+    public RetrofitManager(String baseUrl){
+        instance = this;
+        this.baseUrl = baseUrl;
+    }
+
+    public RetrofitManager init(){
+        OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
+        okBuilder.connectTimeout(connectTimeOut, TimeUnit.SECONDS);
+        okBuilder.readTimeout(readTimeOut,TimeUnit.SECONDS.SECONDS);
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(baseUrl)
-                .client(okBuileder.build())
-//                .addConverterFactory(GsonConverterFactory.create())
+                .client(okBuilder.build())
                 .build();
         httpRequestService = retrofit.create(HttpRequestService.class);
+        return instance;
     }
 
     public void setConnectTimeOut(int connectTimeOut) {

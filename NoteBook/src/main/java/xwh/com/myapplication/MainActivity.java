@@ -5,10 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.util.concurrent.Callable;
 
 import okhttp3.ResponseBody;
-import retrofit2.adapter.rxjava.Result;
 import rx.Single;
 import rx.SingleSubscriber;
 import rx.Subscriber;
@@ -16,6 +14,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 import xwh.com.api.RetrofitManager;
+import xwh.com.bean.ReadingBook;
+import xwh.com.util.ParseHtmlFormSearch;
 
 public class MainActivity extends BaseActivity {
     private TextView title;
@@ -55,38 +55,33 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        single = Single.fromCallable(new Callable() {
-            @Override
-            public ReadingBook call() throws Exception {
-                readingBook = loadContentUtil.getText(readingBook);
-                return readingBook;
-            }
-        });
-
-        subscription = new RetrofitManager().httpRequestService.searchBook("将夜","1","15772447660171623812")
+        subscription = new RetrofitManager().init().httpRequestService.searchBook("将夜","1","15772447660171623812")
+        .subscribeOn(Schedulers.io())
         .doOnSubscribe(new Action0() {
             @Override
             public void call() {
-
-                    }
-                })
+                content.setText("hahahahahaahah");
+            }
+        })
         .subscribeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Subscriber<Result<ResponseBody>>() {
+        .subscribe(new Subscriber<ResponseBody>() {
             @Override
             public void onCompleted() {
+                Log.e("TAG","onCompleted");
             }
 
             @Override
             public void onError(Throwable e) {
+                Log.e("TAG","onError");
                 e.printStackTrace();
             }
 
             @Override
-            public void onNext(Result<ResponseBody> stringResult) {
+            public void onNext(ResponseBody stringResult) {
+                Log.e("TAG","onNext");
                 try {
-                    Log.e("TAG",stringResult.response().body().string());
+                    ParseHtmlFormSearch.getListFromHtml(stringResult.string().toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

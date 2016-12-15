@@ -7,6 +7,8 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
+import xwh.com.bean.ReadingBook;
+
 /**
  * Author xwh
  * Email 1152046774@qq.com
