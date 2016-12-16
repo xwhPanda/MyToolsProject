@@ -2,6 +2,8 @@ package xwh.com.myapplication;
 
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -30,9 +32,15 @@ public class MainActivity extends BaseActivity {
     @Override
     void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("haha");
+        toolbar.setTitle("App");
         toolbar.setTitleTextColor(Tools.getColor(this,R.color.white));
         setSupportActionBar(toolbar);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
 
 
         title = (TextView) findViewById(R.id.title);
@@ -72,6 +80,12 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
     }
 
     @Override
