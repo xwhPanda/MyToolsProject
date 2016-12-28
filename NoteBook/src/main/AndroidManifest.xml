@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="xwh.com.myapplication">
+    package="com.lanshu">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".NoteBookApplication"
+        android:name="com.lanshu.myapplication.NoteBookApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         tools:replace="android:icon,android:theme"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.lanshu.myapplication.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

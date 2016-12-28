@@ -4,8 +4,12 @@ android {
     compileSdkVersion 25
     buildToolsVersion "24.0.3"
 
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
-        applicationId "xwh.com.myapplication"
+        applicationId "com.lanshu"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1

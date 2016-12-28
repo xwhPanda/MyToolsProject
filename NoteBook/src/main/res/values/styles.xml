@@ -7,4 +7,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="toolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!--加了android前缀不起作用-->
+        <!--<item name="android:selectableItemBackground">@drawable/toolbar_selector</item>-->
+        <item name="selectableItemBackground">@drawable/toolbar_selector</item>
+    </style>
+    
 </resources>

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="menu_search">搜索</string>
+    <string name="menu_books">书城</string>
 </resources>
