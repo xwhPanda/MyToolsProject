@@ -21,7 +21,6 @@ public class ParseHtmlFormSearch {
         List<ReadingBook> bookList = new ArrayList<>();
         Document document = Jsoup.parse(html);
         Elements elements = document.getElementsByClass("result-item result-game-item");
-//        Log.e("TAG",elements.get(0).html());
         for (Element element : elements){
             ReadingBook readingBook = new ReadingBook();
             readingBook.setBookPic(getBookImgUrl(element));

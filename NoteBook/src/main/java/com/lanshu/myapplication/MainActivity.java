@@ -1,30 +1,27 @@
 package com.lanshu.myapplication;
 
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lanshu.R;
 import com.lanshu.api.RetrofitManager;
 import com.lanshu.bean.ReadingBook;
+import com.lanshu.rx.LoadCallBack;
+import com.lanshu.rx.SubscriptionUtil;
+import com.lanshu.util.GetRecommendContent;
+import com.lanshu.util.Tools;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import rx.Single;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
-import com.lanshu.R;
-
-import com.lanshu.util.ParseHtmlFormSearch;
-import com.lanshu.util.Tools;
+import rx.Subscription;
 
 public class MainActivity extends BaseActivity {
+    private Subscription subscription;
     private Toolbar toolbar;
     private TextView title;
     private TextView content;
@@ -48,41 +45,33 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
         title = (TextView) findViewById(R.id.title);
         content = (TextView) findViewById(R.id.content);
         nextChapter = (TextView) findViewById(R.id.next_chapter);
         loadContentUtil = new LoadContentUtil();
 
-        subscription = new RetrofitManager().init().httpRequestService.searchBook("将夜","1","10977942222484467615")
-        .subscribeOn(Schedulers.io())
-        .doOnSubscribe(new Action0() {
+        subscription = new SubscriptionUtil().init(new RetrofitManager("http://www.00ksw.net/").init().httpRequestService.getHomeRecommend(), new LoadCallBack<ResponseBody>() {
             @Override
-            public void call() {
-            }
-        })
-        .subscribeOn(AndroidSchedulers.mainThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Subscriber<ResponseBody>() {
-            @Override
-            public void onCompleted() {
+            public void onStartLoad() {
+
             }
 
             @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onNext(ResponseBody stringResult) {
+            public void onSuccess(ResponseBody result) {
                 try {
-                    List<ReadingBook> bookList = ParseHtmlFormSearch.getListFromHtml(stringResult.string().toString());
-                    Log.e("TAG",bookList.toString());
+//                    List<ReadingBook> bookList = ParseHtmlFormSearch.getListFromHtml(result.string().toString());
+                    GetRecommendContent.getRecommendBook(result.string().toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onCompleted() {
+
+            }
         });
+
     }
 
     @Override
@@ -94,5 +83,12 @@ public class MainActivity extends BaseActivity {
     @Override
     int getContentViewId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (subscription != null && !subscription.isUnsubscribed())
+            subscription.unsubscribe();
     }
 }

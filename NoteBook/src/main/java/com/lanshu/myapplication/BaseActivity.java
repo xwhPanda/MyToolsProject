@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import rx.Subscription;
 
 /**
  * Author xwh
@@ -16,7 +15,6 @@ import rx.Subscription;
 public abstract class BaseActivity extends AppCompatActivity {
     protected SweetAlertDialog sweetAlertDialog;
     protected Context mContext;
-    protected Subscription subscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,11 +36,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unSubscribe();
-    }
-
-    protected void unSubscribe(){
-        if (subscription != null && !subscription.isUnsubscribed())
-            subscription.unsubscribe();
     }
 }
