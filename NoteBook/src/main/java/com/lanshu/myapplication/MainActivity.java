@@ -1,6 +1,7 @@
 package com.lanshu.myapplication;
 
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -11,7 +12,6 @@ import com.lanshu.api.RetrofitManager;
 import com.lanshu.bean.ReadingBook;
 import com.lanshu.rx.LoadCallBack;
 import com.lanshu.rx.SubscriptionUtil;
-import com.lanshu.util.GetRecommendContent;
 import com.lanshu.util.Tools;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
         nextChapter = (TextView) findViewById(R.id.next_chapter);
         loadContentUtil = new LoadContentUtil();
 
-        subscription = new SubscriptionUtil().init(new RetrofitManager("http://www.00ksw.net/").init().httpRequestService.getHomeRecommend(), new LoadCallBack<ResponseBody>() {
+        subscription = new SubscriptionUtil().init(new RetrofitManager().init().httpRequestService.getHomeRecommend(), new LoadCallBack<ResponseBody>() {
             @Override
             public void onStartLoad() {
 
@@ -60,7 +60,9 @@ public class MainActivity extends BaseActivity {
             public void onSuccess(ResponseBody result) {
                 try {
 //                    List<ReadingBook> bookList = ParseHtmlFormSearch.getListFromHtml(result.string().toString());
-                    GetRecommendContent.getRecommendBook(result.string().toString());
+                    Log.e("TAG",result.string());
+
+//                    GetRecommendContent.getRecommendBook(result.string().toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -72,6 +74,18 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                Connection connection = Jsoup.connect("http://www.00ksw.net/");
+//                try {
+//                    Log.e("TAG",connection.get().html());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }.start();
     }
 
     @Override

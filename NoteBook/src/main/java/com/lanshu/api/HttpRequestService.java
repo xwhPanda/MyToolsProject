@@ -2,7 +2,6 @@ package com.lanshu.api;
 
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -29,7 +28,6 @@ public interface HttpRequestService {
      * 获取首页推荐
      * @return
      */
-    @Headers({"Accept-Encoding: None","Content-Type: text/html;charset=utf-8"})
     @GET("/")
     Observable<ResponseBody> getHomeRecommend();
 }
