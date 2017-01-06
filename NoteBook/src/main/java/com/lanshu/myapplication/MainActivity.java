@@ -1,5 +1,10 @@
 package com.lanshu.myapplication;
 
+import android.databinding.DataBindingUtil;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -8,19 +13,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lanshu.R;
+import com.lanshu.adapter.RecommendBookAdapter;
 import com.lanshu.api.RetrofitManager;
 import com.lanshu.bean.ReadingBook;
+import com.lanshu.databinding.ActivityMainBinding;
 import com.lanshu.rx.LoadCallBack;
 import com.lanshu.rx.SubscriptionUtil;
+import com.lanshu.util.GetRecommendContent;
 import com.lanshu.util.Tools;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import rx.Single;
 import rx.Subscription;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity{
     private Subscription subscription;
     private Toolbar toolbar;
     private TextView title;
@@ -30,8 +40,15 @@ public class MainActivity extends BaseActivity {
     private ReadingBook readingBook;
     private Single<ReadingBook> single;
 
+    private List<ReadingBook> readingBookList = new ArrayList<>();
+    private RecommendBookAdapter recommendBookAdapter;
+    private ActivityMainBinding binding;
+
+
     @Override
-    void initView() {
+    protected void onCreate(@Nullable Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("App");
         toolbar.setTitleTextColor(Tools.getColor(this, R.color.white));
@@ -45,9 +62,10 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        title = (TextView) findViewById(R.id.title);
-        content = (TextView) findViewById(R.id.content);
-        nextChapter = (TextView) findViewById(R.id.next_chapter);
+        recommendBookAdapter = new RecommendBookAdapter(readingBookList);
+        binding.recyclerView.setAdapter(recommendBookAdapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         loadContentUtil = new LoadContentUtil();
 
         subscription = new SubscriptionUtil().init(new RetrofitManager().init().httpRequestService.getHomeRecommend(), new LoadCallBack<ResponseBody>() {
@@ -59,9 +77,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(ResponseBody result) {
                 try {
-//                    List<ReadingBook> bookList = ParseHtmlFormSearch.getListFromHtml(result.string().toString());
-                    Log.e("TAG",result.string());
 
+                    readingBookList.addAll(GetRecommendContent.getRecommendBook(result.string()));
+                    recommendBookAdapter.notifyDataSetChanged();
 //                    GetRecommendContent.getRecommendBook(result.string().toString());
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -73,30 +91,12 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-
-
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                Connection connection = Jsoup.connect("http://www.00ksw.net/");
-//                try {
-//                    Log.e("TAG",connection.get().html());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }.start();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main,menu);
         return true;
-    }
-
-    @Override
-    int getContentViewId() {
-        return R.layout.activity_main;
     }
 
     @Override

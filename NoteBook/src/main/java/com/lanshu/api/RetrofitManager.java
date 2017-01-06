@@ -16,7 +16,8 @@ public class RetrofitManager {
     public Retrofit retrofit;
     public int connectTimeOut = 10;
     public int readTimeOut = 10;
-    public String baseUrl = "http://zhannei.baidu.com/";
+//    public String baseUrl = "http://zhannei.baidu.com/";
+    public String baseUrl = "http://www.lingdiankanshu.co/";
     public RetrofitManager instance;
 
     public RetrofitManager(){

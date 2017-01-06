@@ -1,5 +1,10 @@
 package com.lanshu.bean;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
+import com.lanshu.BR;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +12,7 @@ import java.io.Serializable;
  * Email 1152046774@qq.com
  * CreateTime 2016/12/8 14:46
  */
-public class ReadingBook implements Serializable{
+public class ReadingBook extends BaseObservable implements Serializable{
     /* 书名 */
     private String bookName;
     /* 正在读的章节 */
@@ -37,12 +42,14 @@ public class ReadingBook implements Serializable{
     /* 更新状态 */
     private String updateStatu;
 
+    @Bindable
     public String getBookName() {
         return bookName;
     }
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
+        notifyPropertyChanged(BR.bookName);
     }
 
     public String getReadChapter() {

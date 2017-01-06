@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -8,7 +9,6 @@
     </data>
 
     <RelativeLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,31 +20,10 @@
             app:theme="@style/toolbarStyle">
         </android.support.v7.widget.Toolbar>
 
-        <ScrollView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/bottom_linear"
-            android:layout_below="@id/toolbar">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{book.readChapter}"/>
-
-                <TextView
-                    android:id="@+id/content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{book.chapterContent}"/>
-            </LinearLayout>
-
-        </ScrollView>
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:id="@+id/bottom_linear"
