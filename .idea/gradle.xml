@@ -8,6 +8,7 @@
         <option name="gradleHome" value="D:\软件\android-studio\gradle\gradle-2.14.1" />
         <option name="modules">
           <set>
+            <option value="$PROJECT_DIR$/../MaterialSearchBar-master" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/NoteBook" />
             <option value="$PROJECT_DIR$/Tools" />

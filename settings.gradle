@@ -1,1 +1,3 @@
 include ':app', ':Tools', ':NoteBook'
+include ':MaterialSearchBar-master'
+project(':MaterialSearchBar-master').projectDir = new File(settingsDir, '../MaterialSearchBar-master')
