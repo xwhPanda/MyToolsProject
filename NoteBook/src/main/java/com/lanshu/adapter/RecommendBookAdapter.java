@@ -1,8 +1,8 @@
 package com.lanshu.adapter;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +28,8 @@ public class RecommendBookAdapter extends RecyclerView.Adapter<RecommendBookAdap
 
     @Override
     public RecommendBookAdapter.RecommendBookHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_recommend_item,parent,false);
-        return new RecommendBookHolder(view);
+        ViewDataBinding dataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.home_recommend_item,parent,false);
+        return new RecommendBookHolder(dataBinding.getRoot());
     }
 
     @Override
@@ -51,9 +51,8 @@ public class RecommendBookAdapter extends RecyclerView.Adapter<RecommendBookAdap
         }
 
         public void bindReadBook(ReadingBook readingBook){
-            binding.setVariable(BR.bookName,readingBook);
+            binding.setVariable(BR.readBook,readingBook);
             binding.executePendingBindings();
-//            binding.setReadBook(readingBook);
         }
     }
 }

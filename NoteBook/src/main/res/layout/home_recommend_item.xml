@@ -32,12 +32,5 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"/>
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sfsdsfs"
-            android:textColor="@android:color/black"
-            android:layout_gravity="center_vertical"
-            android:textSize="18sp"/>
     </LinearLayout>
 </layout>
