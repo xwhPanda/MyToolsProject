@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.lanshu.R;
 import com.lanshu.adapter.RecommendBookAdapter;
 import com.lanshu.api.RetrofitManager;
@@ -44,7 +46,10 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
-        setSupportActionBar(toolbar);
+
+        binding.bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
+        binding.bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_launcher,"书架"))
+        .initialise();
 
         recommendBookAdapter = new RecommendBookAdapter(readingBookList);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));

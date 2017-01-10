@@ -16,7 +16,8 @@
         <com.ashokvarma.bottomnavigation.BottomNavigationBar
             android:id="@+id/bottom_navigation_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="40dp"
+            android:background="@android:color/holo_red_dark"/>
         <FrameLayout
             android:id="@+id/content_layout"
             android:layout_width="match_parent"
