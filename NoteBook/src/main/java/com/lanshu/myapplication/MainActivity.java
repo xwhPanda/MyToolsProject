@@ -6,11 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lanshu.R;
 import com.lanshu.adapter.RecommendBookAdapter;
@@ -20,7 +16,6 @@ import com.lanshu.databinding.ActivityMainBinding;
 import com.lanshu.rx.LoadCallBack;
 import com.lanshu.rx.SubscriptionUtil;
 import com.lanshu.util.GetRecommendContent;
-import com.lanshu.util.Tools;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,22 +44,11 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("App");
-        toolbar.setTitleTextColor(Tools.getColor(this, R.color.white));
         setSupportActionBar(toolbar);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.action_search)
-                    Toast.makeText(MainActivity.this,"ssss",Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
 
         recommendBookAdapter = new RecommendBookAdapter(readingBookList);
-        binding.recyclerView.setAdapter(recommendBookAdapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setAdapter(recommendBookAdapter);
 
         loadContentUtil = new LoadContentUtil();
 
@@ -91,12 +75,6 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
-        return true;
     }
 
     @Override

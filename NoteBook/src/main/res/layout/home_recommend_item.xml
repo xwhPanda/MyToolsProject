@@ -10,21 +10,24 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:layout_width="40dp"
             android:layout_height="50dp"
-            android:scaleType="center"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_launcher"/>
+            app:fadeDuration="300"
+            app:actualImageScaleType="focusCrop"
+            app:image="@{readBook.bookPic}"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
