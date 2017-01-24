@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="eventListener"
+            type="com.lanshu.util.EventListener"/>
+    </data>
+    <LinearLayout
+        style="@style/MatchContentStyle"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            style="@style/TitleTextStyle"
+            android:text="@string/app_name"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/search_edit"
+            android:textSize="13dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:hint="@string/search_hint"
+            android:lines="1"
+            android:textColor="@color/textGrayColor"/>
+
+        <ImageView
+            style="@style/WrapContentStyle"
+            android:src="@mipmap/search"
+            android:onClick="@{eventListener.search}"/>
+    </LinearLayout>
+</layout>

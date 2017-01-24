@@ -5,10 +5,9 @@ import com.lanshu.R;
 /**
  * Author xwh
  * Email 1152046774@qq.com
- * CreateTime 2017/1/10 20:19
+ * CreateTime 2017/1/23 15:16
  */
-public class BookshelfFragment extends BaseFragment {
-
+public class BookClassifyFragment extends BaseFragment {
     @Override
     protected void createView() {
 
@@ -16,6 +15,6 @@ public class BookshelfFragment extends BaseFragment {
 
     @Override
     protected int getLayoutViewId() {
-        return R.layout.book_shelf_fragment;
+        return R.layout.book_classify_fragment;
     }
 }

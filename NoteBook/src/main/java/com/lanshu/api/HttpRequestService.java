@@ -2,6 +2,7 @@ package com.lanshu.api;
 
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -11,9 +12,6 @@ import rx.Observable;
  * CreateTime 2016/12/12 17:04
  */
 public interface HttpRequestService {
-//    http://zhannei.baidu.com/cse/search?q=将夜&click=1&s=15772447660171623812
-//    http://www.00ksw.net/
-
     /**
      * 搜索
      * @param searchString
@@ -30,4 +28,11 @@ public interface HttpRequestService {
      */
     @GET("/")
     Observable<ResponseBody> getHomeRecommend();
+
+    /**
+     * 获取书籍详情
+     * @return
+     */
+    @GET("{name}")
+    Observable<ResponseBody> getBookDetail(@Path("name") String name);
 }

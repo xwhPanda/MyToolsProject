@@ -37,6 +37,7 @@ public class SubscriptionUtil {
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();
                         Log.e("TAG", "onError : " + e.getMessage());
                         loadCallBack.onError();
 

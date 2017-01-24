@@ -3,37 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="readBook"
-            type="com.lanshu.bean.ReadingBook"/>
+            type="com.lanshu.bean.ReadingBook" />
     </data>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="2dp">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_vertical"
             app:fadeDuration="300"
             app:actualImageScaleType="focusCrop"
-            app:image="@{readBook.bookPic}"/>
+            app:image="@{readBook.bookPic}" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
+            android:orientation="vertical"
             android:gravity="center_vertical"
             android:layout_marginLeft="10dp">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TextStyle"
                 android:text="@{readBook.bookName}"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"/>
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout style="@style/WrapContentStyle"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/TextStyle"
+                    android:text="作者:"/>
+                <TextView
+                    style="@style/TextStyle"
+                    android:text="@{readBook.author.name}"/>
+            </LinearLayout>
+            <TextView
+                style="@style/TextStyle"
+                android:text="@{readBook.desc}"/>
         </LinearLayout>
     </LinearLayout>
 </layout>

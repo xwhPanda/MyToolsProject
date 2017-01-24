@@ -15,4 +15,5 @@ public class Utils {
     public static void loadImage(SimpleDraweeView view,String url){
         view.setImageURI(url);
     }
+
 }

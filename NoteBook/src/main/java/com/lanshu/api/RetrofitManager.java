@@ -12,11 +12,11 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
  * CreateTime 2016/12/12 16:36
  */
 public class RetrofitManager {
+    public static final String HOST_URL = "http://www.lingdiankanshu.co/";
     public HttpRequestService httpRequestService;
     public Retrofit retrofit;
     public int connectTimeOut = 10;
     public int readTimeOut = 10;
-//    public String baseUrl = "http://zhannei.baidu.com/";
     public String baseUrl = "http://www.lingdiankanshu.co/";
     public RetrofitManager instance;
 
@@ -24,10 +24,6 @@ public class RetrofitManager {
         instance = this;
     }
 
-    public RetrofitManager(String baseUrl){
-        instance = this;
-        this.baseUrl = baseUrl;
-    }
 
     public RetrofitManager init(){
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();

@@ -7,10 +7,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="FullScreen" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">?android:windowNoTitle</item>
+    </style>
+
     <style name="toolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <!--加了android前缀不起作用-->
         <!--<item name="android:selectableItemBackground">@drawable/toolbar_selector</item>-->
         <item name="selectableItemBackground">@drawable/toolbar_selector</item>
     </style>
-    
+
+    <style name="WrapContentStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="MatchContentStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="TitleTextStyle" parent="WrapContentStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+    <style name="TextStyle" parent="WrapContentStyle">
+        <item name="android:textColor">@color/textGrayColor</item>
+        <item name="android:textSize">13dp</item>
+    </style>
 </resources>

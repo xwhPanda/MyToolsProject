@@ -61,7 +61,7 @@ public class GetRecommendContent {
         Author author = new Author();
         author.setName(elements.first().select("span").text());
         readingBook.setAuthor(author);
-        readingBook.setHostUrl(HOST_URL + elements.first().select("a[href]").first().attr("href"));
+        readingBook.setHostUrl(elements.first().select("a[href]").first().attr("href"));
         readingBook.setBookName(elements.first().select("a[href]").first().text());
         Elements elements1 = element.getElementsByTag("dd");
         readingBook.setDesc(elements1.first().text().replaceAll(" ",""));

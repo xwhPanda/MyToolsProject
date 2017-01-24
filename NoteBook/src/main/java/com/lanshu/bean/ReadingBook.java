@@ -41,6 +41,35 @@ public class ReadingBook extends BaseObservable implements Serializable{
     private String clickNumber;
     /* 更新状态 */
     private String updateStatu;
+    /* 最近更新时间 */
+    private String latestUpdateTime;
+    /* 最近更新章节 */
+    private String latestUpdateChapter;
+    /* 最近更新章节地址 */
+    private String latestUpdateChapterAddress;
+
+    @Override
+    public String toString() {
+        return "ReadingBook{" +
+                "bookName='" + bookName + '\'' +
+                ", readChapter='" + readChapter + '\'' +
+                ", hostUrl='" + hostUrl + '\'' +
+                ", url='" + url + '\'' +
+                ", latestReadTime='" + latestReadTime + '\'' +
+                ", lastChapterUrl='" + lastChapterUrl + '\'' +
+                ", nextChapterUrl='" + nextChapterUrl + '\'' +
+                ", chapterContent='" + chapterContent + '\'' +
+                ", bookPic='" + bookPic + '\'' +
+                ", desc='" + desc + '\'' +
+                ", author=" + author +
+                ", wordNumber='" + wordNumber + '\'' +
+                ", clickNumber='" + clickNumber + '\'' +
+                ", updateStatu='" + updateStatu + '\'' +
+                ", latestUpdateTime='" + latestUpdateTime + '\'' +
+                ", latestUpdateChapter='" + latestUpdateChapter + '\'' +
+                ", latestUpdateChapterAddress='" + latestUpdateChapterAddress + '\'' +
+                '}';
+    }
 
     @Bindable
     public String getBookName() {
@@ -50,6 +79,30 @@ public class ReadingBook extends BaseObservable implements Serializable{
     public void setBookName(String bookName) {
         this.bookName = bookName;
         notifyPropertyChanged(BR.bookName);
+    }
+
+    public String getLatestUpdateTime() {
+        return latestUpdateTime;
+    }
+
+    public void setLatestUpdateTime(String latestUpdateTime) {
+        this.latestUpdateTime = latestUpdateTime;
+    }
+
+    public String getLatestUpdateChapter() {
+        return latestUpdateChapter;
+    }
+
+    public void setLatestUpdateChapter(String latestUpdateChapter) {
+        this.latestUpdateChapter = latestUpdateChapter;
+    }
+
+    public String getLatestUpdateChapterAddress() {
+        return latestUpdateChapterAddress;
+    }
+
+    public void setLatestUpdateChapterAddress(String latestUpdateChapterAddress) {
+        this.latestUpdateChapterAddress = latestUpdateChapterAddress;
     }
 
     public String getReadChapter() {
@@ -116,6 +169,7 @@ public class ReadingBook extends BaseObservable implements Serializable{
         this.bookPic = bookPic;
     }
 
+    @Bindable
     public String getDesc() {
         return desc;
     }
@@ -156,23 +210,4 @@ public class ReadingBook extends BaseObservable implements Serializable{
         this.updateStatu = updateStatu;
     }
 
-    @Override
-    public String toString() {
-        return "ReadingBook{" +
-                "bookName='" + bookName + '\'' +
-                ", readChapter='" + readChapter + '\'' +
-                ", hostUrl='" + hostUrl + '\'' +
-                ", url='" + url + '\'' +
-                ", latestReadTime='" + latestReadTime + '\'' +
-                ", lastChapterUrl='" + lastChapterUrl + '\'' +
-                ", nextChapterUrl='" + nextChapterUrl + '\'' +
-                ", chapterContent='" + chapterContent + '\'' +
-                ", bookPic='" + bookPic + '\'' +
-                ", desc='" + desc + '\'' +
-                ", author=" + author +
-                ", wordNumber='" + wordNumber + '\'' +
-                ", clickNumber='" + clickNumber + '\'' +
-                ", updateStatu='" + updateStatu + '\'' +
-                '}';
-    }
 }
